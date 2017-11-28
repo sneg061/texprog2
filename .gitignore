@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# Databases
+*.db
+*.opendb
+
+# Debug folders
+*/Debug
+*/.vs
