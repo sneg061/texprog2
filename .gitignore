@@ -37,4 +37,12 @@
 
 # Debug folders
 */Debug
-*/.vs
+/.vs
+
+# Debug files
+*.pdb
+*.ilk
+
+# VS files
+*.filters
+*.user
