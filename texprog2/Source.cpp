@@ -6,7 +6,7 @@
 using namespace std;
 
 
-DWORD WINAPI someFunc(LPVOID param);
+DWORD WINAPI testFunc(LPVOID param);
 
 Semaphore sem(4);
 
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
 	for (int i = 0; i < 8; i++)
 	{
-		HANDLE h = CreateThread(NULL, 0, someFunc, LPVOID(new int(i)), 0, &id);
+		HANDLE h = CreateThread(NULL, 0, testFunc, LPVOID(new int(i)), 0, &id);
 	}
 
 	ct = true;
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 		}
 }
 
-DWORD WINAPI someFunc(LPVOID a)
+DWORD WINAPI testFunc(LPVOID a)
 {
 	while (!ct);
 
@@ -40,16 +40,32 @@ DWORD WINAPI someFunc(LPVOID a)
 		sem.Enter();
 		printf("%i Start\n", number);
 
-		for (int p = 0; p < number + 1; p++) {
-			int calc = 0;
-			for (int i = 1; i < 501; i++)
-			{
-				calc += i / (number + 1); Sleep(10);
-			}
-			printf("Thread %i; res = %i\n", number, calc);
+		auto mas = new int[(number+1)*20];
+		for (int i = 0; i<(number + 1) * 20; i++)
+		{
+			mas[i] = rand() % 10;
+		}
+		bool changes = true;
+		while (changes)
+		{
+			changes = false;
+			for (int i = 0; i < (number + 1) * 20; i++)
+				if (mas[i] > mas[i + 1])
+				{
+					int a = mas[i];
+					mas[i] = mas[i + 1];
+					mas[i + 1] = a;
+					changes = true;
+				}
+			Sleep(number);
 		}
 
-		printf("%i End.", number);
+		for (int i = 0; i < (number + 1) * 20; i++)
+			printf("%i ", mas[i]);
+		
+		Sleep(1);
+
+		printf("\n%i End.\n", number);
 		sem.Leave();
 
 	}
