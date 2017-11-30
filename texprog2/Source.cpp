@@ -67,6 +67,5 @@ DWORD WINAPI testFunc(LPVOID a)
 
 		printf("\n%i End.\n", number);
 		sem.Leave();
-
 	}
 }

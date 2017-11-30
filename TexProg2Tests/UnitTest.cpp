@@ -8,48 +8,11 @@ using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 
 namespace TexProg2Tests
 {
-	int abort_thread = 0;
-
-	void testFunc(LPVOID param)
-	{
-		Semaphore * smp = (Semaphore *)param;
-
-		while (1)
-		{
-			if (abort_thread)
-				return;
-
-			smp->Enter();
-			auto mas = new int[1000];
-			for (int i = 0; i<1000; i++)
-			{
-				mas[i] = rand() % 1000 - 500;
-			}
-			bool changes = true;
-			while (changes)
-			{
-				changes = false;
-				for (int i = 0; i < 999; i++)
-					if (mas[i] > mas[i + 1])
-					{
-						int a = mas[i];
-						mas[i] = mas[i + 1];
-						mas[i + 1] = a;
-						changes = true;
-					}
-				Sleep(1);
-			}
-			delete[] mas;
-			smp->Leave();
-		}
-	}
-
 	[TestClass]
 	public ref class UnitTest
 	{
 	private:
 		TestContext^ testContextInstance;
-
 	public: 
 		/// <summary>
 		///Получает или устанавливает контекст теста, в котором предоставляются
@@ -91,8 +54,8 @@ namespace TexProg2Tests
 
 		void TestBody(int threads, int semaphore, int wt)
 		{
-
-			abort_thread = 0;
+			Test test;
+			test.abort_thread = 0;
 
 			Semaphore test_sm(semaphore);
 
@@ -101,12 +64,12 @@ namespace TexProg2Tests
 			DWORD id;
 			for (int i = 0; i < threads; i++)
 			{
-				h[i] = CreateThread(NULL, 0, LPTHREAD_START_ROUTINE(testFunc), &test_sm, 0, &id);
+				h[i] = CreateThread(NULL, 0, test.testFunc, &test_sm, 0, &id);
 			}
 
 			Sleep(wt);
 
-			abort_thread = 1;
+			test.abort_thread = 1;
 			WaitForMultipleObjects(threads, h, TRUE, INFINITY);
 
 			delete h;

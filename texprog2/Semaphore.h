@@ -49,4 +49,11 @@ public:
 	int ret_Count_dbg() { return count_dbg; }
 };
 
+class Test
+{
+public:
+	int abort_thread;
+	DWORD WINAPI testFunc(LPVOID param);
+};
+
 #endif
