@@ -18,5 +18,5 @@ https://msdn.microsoft.com/en-us/library/windows/desktop/ms682530(v=vs.85).aspx,
 https://msdn.microsoft.com/en-us/library/windows/desktop/ms682655(v=vs.85).aspx.
 
  Авторы: 
-	#####
-	Голубев Никита, Миренский Даниил.
+#####
+Голубев Никита, Миренский Даниил.
