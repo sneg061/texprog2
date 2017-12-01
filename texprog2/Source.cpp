@@ -49,7 +49,7 @@ DWORD WINAPI testFunc(LPVOID a)
 		while (changes)
 		{
 			changes = false;
-			for (int i = 0; i < (number + 1) * 20; i++)
+			for (int i = 0; i < (number + 1) * 20-1; i++)
 				if (mas[i] > mas[i + 1])
 				{
 					int a = mas[i];
