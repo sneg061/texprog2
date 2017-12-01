@@ -12,9 +12,9 @@
 
 
 Литература:
-Рекомендуемая среда разработки Microsoft Visual Studio 2015 /n
-https://msdn.microsoft.com/ru-ru/library/ms182470.aspx  /n
-https://msdn.microsoft.com/en-us/library/windows/desktop/ms682530(v=vs.85).aspx /n
-https://msdn.microsoft.com/en-us/library/windows/desktop/ms682655(v=vs.85).aspx /n
+Рекомендуемая среда разработки Microsoft Visual Studio 2015, 
+https://msdn.microsoft.com/ru-ru/library/ms182470.aspx, 
+https://msdn.microsoft.com/en-us/library/windows/desktop/ms682530(v=vs.85).aspx, 
+https://msdn.microsoft.com/en-us/library/windows/desktop/ms682655(v=vs.85).aspx.
 
  Авторы: Голубев Никита, Миренский Даниил.
